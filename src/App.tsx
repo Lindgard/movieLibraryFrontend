@@ -3,10 +3,14 @@ import Button from './components/common/Button'
 
 function App() {
 
+  const handleClick = () => {
+    alert("Button clicked!");
+  }
+
   return (
     <>
       <h1>Hello, world!</h1>
-      <Button onClick={() => alert("Button clicked!")}>Click me</Button>
+      <Button onClick={handleClick}>Click me</Button>
     </>
   )
 }
