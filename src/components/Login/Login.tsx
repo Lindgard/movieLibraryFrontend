@@ -39,6 +39,7 @@ const Login = () => {
             setError(err instanceof Error ? err.message : "Failed to login. Please try again.")
         }
     }
+
     return (
         <form className="login_form" onSubmit={handleSubmit}>
             <TextInput
