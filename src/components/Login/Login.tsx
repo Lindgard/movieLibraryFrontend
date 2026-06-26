@@ -1,11 +1,21 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Button from "../common/Button"
 import TextInput from "../common/TextInput"
+import ErrorMessage from "../common/ErrorMessage"
 
 const Login = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState<string | null>(null)
+
+    useEffect(() => {
+        if (!error) return
+
+        const dismissError = () => setError(null)
+
+        document.addEventListener("click", dismissError)
+        return () => document.removeEventListener("click", dismissError)
+    }, [error])
 
     const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -43,7 +53,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <ErrorMessage message={error} />}
             <Button type="submit">Login</Button>
         </form>
     )
